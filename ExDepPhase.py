@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import warnings
+warnings.filterwarnings("ignore")
 def autocorr(tr,stalign_a=5,stalign_b=20):
         winlen = 15
         N = tr.stats.npts
@@ -107,7 +109,7 @@ for ievent in range(0,nevent):
     irissta = pd.read_csv('/'.join([eqdir,evname1,'station_event']),header=None,names=                   ('net','sta','loc','channel','lat','lon','ele','tmp1','datasrc','startt',                  'evlat','evlon','evdep','mg','tmp2','tmp3','tmp4','temp5'),na_filter=False)
 
     print ('the',ievent,'th event')
-    print ('evinfo for eq 1:',evname1,evmag1,evlat1,evlon1,evdep1)
+    print (f'evinfo for eq 1:eventid:{evname1},Magnitude:{evmag1},Latitude:{evlat1},Longitude{evlon1},Depth:{evdep1}')
 
     nsta = len(stalist1)
     stapos = np.zeros((nsta,2))
@@ -188,7 +190,7 @@ for ievent in range(0,nevent):
                 tr.data = data
 
                 
-    print ('finishing',time.time()-start )
+    print (f'finishing: Time elapsed:{time.time()-start:.1f} seconds')
     
     strmacc1.resample(rsample)
     if len(strmacc1) < 10:
